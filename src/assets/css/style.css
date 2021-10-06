@@ -1087,7 +1087,7 @@ File: scss
       .topbar ul.dropdown-user li .dw-user-box {
         padding: 10px 15px; }
         .topbar ul.dropdown-user li .dw-user-box .u-img {
-          width: 70px;
+          width: 50px;
           display: inline-block;
           vertical-align: top; }
           .topbar ul.dropdown-user li .dw-user-box .u-img img {

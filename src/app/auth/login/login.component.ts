@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit {
           });
 
         }, ( error: any ) => {
-          alert(JSON.stringify(error, undefined, 2));
+          console.log(JSON.stringify(error, undefined, 2));
         });
   }
 
