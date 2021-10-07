@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
+import { CargarUsuarios } from '../interfaces/argar-usuarios.interface';
 
 import { LoginForm } from '../interfaces/login-form.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
@@ -30,6 +31,14 @@ export class UsuarioService {
   get token(): string{ return localStorage.getItem('token') || ''; }
 
   get uid(): string{ return this.usuario.uid || ''; }
+
+  get headers(){
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    }
+  }
 
   googleInit() {
     
@@ -130,6 +139,28 @@ export class UsuarioService {
                       })
                     )
     
+  }
+
+  cargarUsuarios( desde: number) {
+
+    const url = `${ base_url }/usuarios?desde=${ desde }`;
+
+    return this.http.get<CargarUsuarios>( url, this.headers )
+                    .pipe(
+                      map( resp => {
+
+                        const usuarios = resp.usuarios.map( 
+                          user => new Usuario( user.nombre, user.email, '', user.img, user.google, user.role, user.uid)
+                          );
+
+                          return {
+                            total: resp.total,
+                            usuarios
+                          }
+
+                      })
+                    )
+
   }
 
 }
