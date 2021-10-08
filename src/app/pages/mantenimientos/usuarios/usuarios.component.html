@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
 
-                    <input type="text" class="form-control" placeholder="Buscar usuario" />
+                    <input type="text" class="form-control" placeholder="Buscar usuario" #txtTermino (keyup)="buscar(txtTermino.value)" />
 
             </div>
         </div>
@@ -26,7 +26,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Usuarios</h4>
-                <h6 class="card-subtitle">Usuarios registrados en la aplicación. ({{ total_usuario }}) - ({{ desde }})</h6>
+                <h6 class="card-subtitle">Usuarios registrados en la aplicación.</h6>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -34,7 +34,7 @@
                                 <th class="w100">Avatar</th>
                                 <th>Email</th>
                                 <th>Nombre</th>
-                                <th class="w100">Roles</th>
+                                <th width="150">Roles</th>
                                 <th class="w100">Auth</th>
                                 <th class="w100 text-nowrap">Acciones</th>
                             </tr>
@@ -42,27 +42,40 @@
                         <tbody>
                             <tr *ngFor="let usuario of usuarios">
                                 <td class="text-center">
-                                    <img [src]="usuario.imagenUrl" alt="user" class="img-circle foto">
+                                    <img [src]="usuario.imagenUrl" alt="user" class="img-circle foto cursor" (click)="abrirModal(usuario)">
                                 </td>
                                 <td>{{ usuario.email }}</td>
                                 <td>{{ usuario.nombre }}</td>
-                                <td>{{ usuario.role }}</td>
+                                <td>
+
+                                    <select class="form-control" [(ngModel)]="usuario.role" (change)="cambiarRole(usuario)">
+                                        <option value="ADMIN_ROLE">Admin</option>
+                                        <option value="USER_ROLE">User</option>
+                                    </select>
+
+                                </td>
                                 <td>
                                     <div *ngIf="usuario.google" class="label label-table label-danger">Google</div>
                                     <div *ngIf="!usuario.google" class="label label-table label-info">Email</div>
                                 </td>
                                 <td class="text-wrap text-center">
-                                    <a href="#" data-toggle="tooltip" data-original-title="Editar"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Borrar"> <i class="fa fa-trash text-danger"></i> </a>
+                                    <!-- <a href="#" data-toggle="tooltip" data-original-title="Editar"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                                    <a data-toggle="tooltip" data-original-title="Borrar" class="cursor" (click)="eliminarUsuario(usuario)"> 
+                                        <i class="fa fa-trash text-danger"></i> 
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <button (click)="cambiarPagina(-5)" class="btn btn-secondary mr-2"><i class="fa fa-chevron-left"></i> Anterior</button>
+                <div *ngIf="txtTermino.value.length === 0">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary mr-2"><i class="fa fa-chevron-left"></i> Anterior</button>
 
-                <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente <i class="fa fa-chevron-right"></i></button>
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente <i class="fa fa-chevron-right"></i></button>
+
+                    &nbsp;&nbsp; Total de registros: <b>{{ total_usuario }}</b>
+                </div>
                 
             </div>
         </div>
