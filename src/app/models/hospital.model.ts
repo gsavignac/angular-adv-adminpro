@@ -14,7 +14,7 @@ export class Hospital {
         
         public nombre: boolean,
         public id?: string,
-        public img?: string,
+        public img: string = '',
         public usuario?: _HospitalUser
         
     ){}

@@ -15,7 +15,7 @@ export class Medico {
         public nombre: string,
         public usuario: _MedicoUser,
         public hospital?: Hospital,
-        public img?: string,
+        public img: string = '',
         public id?: string
     ){}
 

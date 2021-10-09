@@ -1,0 +1,111 @@
+<div class="row animated fadeIn fast">
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-title">Usuarios</h3>  
+                <h5 class="card-subtitle">resultado de la busqueda</h5>    
+
+                <div class="alert alert-info" *ngIf="usuarios.length === 0">
+                    <p class="mb-0"><i class="fa fa-info-circle"></i> No se encontraron usuarios con el termino de busqueda</p>
+                </div>
+
+                <div class="table-responsive" *ngIf="usuarios.length > 0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let usuario of usuarios" class="animated fadeIn fast">
+                                <td>
+                                    <img [src]="usuario.img | imagen:'usuarios'" alt="user" class="img-circle foto">
+                                </td>
+                                <td>{{ usuario.nombre }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-title">Médicos</h3>  
+                <h5 class="card-subtitle">resultado de la busqueda</h5>    
+
+                <div class="alert alert-info" *ngIf="medicos.length === 0">
+                    <p class="mb-0"><i class="fa fa-info-circle"></i> No se encontraron médicos con el termino de busqueda</p>
+                </div>
+
+                <div class="table-responsive" *ngIf="medicos.length > 0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let medico of medicos" class="animated fadeIn fast cursor" (click)="abrirMedico(medico)">
+                                <td>
+                                    <img [src]="medico.img | imagen:'medicos'" 
+                                    class="img-circle foto" 
+                                    [alt]="medico.nombre" 
+                                    style="width: 40px; max-height: 100%;">
+                                </td>
+                                <td>{{medico.nombre}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-title">Hospitales</h3>  
+                <h5 class="card-subtitle">resultado de la busqueda</h5>    
+
+                <div class="alert alert-info" *ngIf="hospitales.length === 0">
+                    <p class="mb-0"><i class="fa fa-info-circle"></i> No se encontraron hospitales con el termino de busqueda</p>
+                </div>
+
+                <div class="table-responsive" *ngIf="hospitales.length > 0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hospital of hospitales" class="animated fadeIn fast">
+                                <td>
+                                    <img [src]="hospital.img | imagen:'hospitales'" 
+                                    class="img-thumbnail" 
+                                    [alt]="hospital.nombre" 
+                                    style="width: 40px; max-height: 100%;">
+                                </td>
+                                <td>{{hospital.nombre}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
