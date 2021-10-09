@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Hospital } from '../models/hospital.model';
 import { Usuario } from '../models/usuario.model';
 
 const base_url = environment.base_url;
@@ -41,6 +42,10 @@ export class BusquedasService {
                         switch ( tipo ) {
                           case 'usuarios':
                             return this.transformarUsuario( resp.resultados );
+                          case 'hospitales':
+                            return resp.resultados;
+                          case 'medicos':
+                            return resp.resultados;
                           default:
                             return [];
                         }

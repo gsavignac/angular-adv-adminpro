@@ -51,7 +51,7 @@ export class ModalImagenComponent implements OnInit {
     .then( img => {
       Swal.fire({ 
         title: 'Éxito', 
-        text: "Imágen de usuario actualizada.", 
+        text: "Imágen actualizada.", 
         icon: 'success',
         timer: 2000
       });

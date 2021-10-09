@@ -21,24 +21,23 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   public desde: number = 0;
   public cargando: boolean = true;
 
-  public imgSubs: any;
+  public imgSubs: Subscription;
 
   constructor(private usuarioService: UsuarioService, private busquedasService: BusquedasService, private modalImagenService: ModalImagenService ) { 
 
+    this.imgSubs = this.modalImagenService.nuevaImagen
+        .pipe( delay(100) )
+        .subscribe( img => this.cargarUsuarios() );
 
   }
 
   ngOnDestroy(): void {
-    this.imgSubs.unsuscribe();
+    this.imgSubs.unsubscribe();
   }
 
   ngOnInit(): void {
 
     this.cargarUsuarios();
-
-    this.imgSubs = this.modalImagenService.nuevaImagen
-        .pipe( delay(100) )
-        .subscribe( img => this.cargarUsuarios() );
 
   }
 
